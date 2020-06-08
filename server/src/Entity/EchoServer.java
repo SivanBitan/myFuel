@@ -98,8 +98,10 @@ public class EchoServer extends AbstractServer
 			  }
 			  else if (msg instanceof Customer) {
 				  Customer customer=(Customer)msg;
+				  User user=(User)msg;
+				  int userID = user.createNewAddSqlStatementUser(sqlcontrol.getConnection());
 				  int custID = customer.createNewAddSqlStatement(sqlcontrol.getConnection());
-				  if(custID == -1) client.sendToClient(false);
+				  if(userID == -1 || custID==-1) client.sendToClient(false);
 				  else {
 					  client.sendToClient(true);
 				  }
